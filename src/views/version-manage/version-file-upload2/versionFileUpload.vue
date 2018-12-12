@@ -142,19 +142,6 @@ export default {
     handleCurrentChange(val) {
       this.queryInfoList();
     },
-
-    //根据版本号查询
-    queryCode(){
-      // this.loading = true;
-      let resBody = new versionQueryList();
-      // resBody.data.versionCode = this.formInline.versionCode; 
-      console.log(resBody.data.versionCode)
-      request(resBody)
-        .then(response=>{
-          console.log(response)
-        })
-    },
-
     /**
      * @description 查询版本信息
      * @param versionCode

@@ -32,14 +32,14 @@
       <el-button type='primary' size='mini' @click="dialogVersionRelease" v-if="btnPermission('Button_VersionRelease_Release')">版本发布</el-button>
       <el-table border class="tableMarginTop" :data="tableData" header-row-class-name="tableHeaderClass">
         <!-- <el-table-column type="selection" width="40"></el-table-column> -->
-        <el-table-column fixed prop="devNum" label="设备编号" width="100"></el-table-column>
-        <el-table-column prop="versionCode" label="版本编号" width="150"></el-table-column>
-        <el-table-column prop="branchNo" label="所属网点" width="120"></el-table-column>
-        <el-table-column prop="isEffective" :formatter="Format" label="是否立即生效" width="120"></el-table-column>
+        <el-table-column fixed prop="devNum" label="设备编号" min-width="100" align="center"></el-table-column>
+        <el-table-column prop="versionCode" label="版本编号" min-width="220" align="center"></el-table-column>
+        <el-table-column prop="branchNo" label="所属网点" min-width="120" align="center"></el-table-column>
+        <!-- <el-table-column prop="isEffective" :formatter="Format" label="是否立即生效" width="120"></el-table-column>
         <el-table-column prop="verUpdateInterval" label="升级时间间隔" width="120"></el-table-column>
         <el-table-column prop="verUpdateDevNum" label="升级机器数量" width="120"></el-table-column>
-        <el-table-column prop="zip" label="开始时间" width="180"></el-table-column>
-        <el-table-column prop="verUpdatePrepareTime" :formatter="dtFormat" label="创建日期" min-width="180"></el-table-column>
+        <el-table-column prop="zip" label="开始时间" width="180"></el-table-column> -->
+        <el-table-column prop="verUpdatePrepareTime" :formatter="dtFormat" label="创建日期" min-width="180" align="center"></el-table-column>
       </el-table>
       <el-pagination style="text-align: right;margin-top:20px;" @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page.sync="currentPage" background :page-sizes="[10, 20, 50,100]" :page-size="pageSize" layout="total, prev, pager, next, jumper" :total="tableTotal">
       </el-pagination>

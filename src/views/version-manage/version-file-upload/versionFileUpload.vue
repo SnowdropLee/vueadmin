@@ -5,7 +5,7 @@
         <el-row :gutter="10">
           <el-col :md="6" :lg="4">
             <el-form-item label="版本编号" prop="versionCode">
-              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询">
+              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable>
                 <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
                 </el-option>
               </el-select>
