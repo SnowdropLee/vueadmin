@@ -1,0 +1,42 @@
+//兼容ie9 有步骤的弹窗设置头标签剧中
+.el-step__icon{
+  left:40%\9\0;
+}
+.el-message__content{
+  display:inline-block\9;
+}
+.is-horizontal.el-step{
+  width:33%\9\0;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner::after{//兼容IE9复选框样式
+  -ms-transform: rotate(45deg) scaleY(1);
+}
+.el-radio__input.is-checked .el-radio__inner::after {//兼容IE9单选框样式
+  -ms-transform: translate(-50%,-50%) scale(1);
+}
+.el-select__tags{//兼容IE9下拉框复选样式
+ -ms-transform: translateY(-50%);
+}
+.el-message-box__status{ //兼容IE9提示框图标下移问题
+  -ms-transform: translateY(-50%);
+}
+.el-checkbox__inner::after{ //兼容IE9表格置灰项任有选中状态
+  -ms-transform: rotate(45deg) scaleY(0)
+}
+//菜单管理  兼容IE9预览菜单图片和文字被覆盖问题
+.tile-item-inner-wrapper{
+  -ms-transform: translateY(-50%);
+}
+.tile-item-active-wrapper{
+  -ms-transform: translateY(-50%);
+}
+.tile-item-content{
+  -ms-transform: translateY(-50%);
+}
+//首页日历翻页将箭头旋转
+.__vev_calendar-wrapper .arrow-left.icon:before{
+  -ms-transform: rotate(-135deg);
+}
+.__vev_calendar-wrapper .arrow-right.icon:before{
+  -ms-transform: rotate(45deg);
+}

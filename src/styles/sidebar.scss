@@ -1,0 +1,117 @@
+#app {
+  // 侧边栏
+  .sidebar-container {
+    transition: width .3s ease;
+    width: 180px !important;
+    height: 100%;
+    position: fixed;
+    top: 60px;
+    // bottom: 0;
+    // height: 300px;
+    left: 0;
+    z-index: 1001;
+    border-top: 1px solid #303030;
+    background: $menuBg;
+    a {
+      // display: inline-block;
+      width: 100%;
+    }
+    .el-menu-item,.el-submenu__title{
+      width: 180px!important;
+      min-width: 180px!important;
+      transition:.3s ease;
+    }
+    .el-scrollbar__wrap {
+      overflow-x: hidden;
+    }
+    .svg-icon {
+      margin-right: 16px;
+    }
+    .el-menu {
+      border: none;
+      width: 100%;
+    }
+    .toggleMenu {
+      color: #fff;
+      // padding: 9px 16px;
+      white-space: nowrap;
+      transition: 0.3s;
+      position: relative;
+      line-height: 32px;
+      height: 32px;
+      overflow: hidden;
+      background: $menuBg;
+      span {
+        position: absolute;
+        top: 0;
+        left: 16px;
+        font-size: 12px;
+        opacity: 0.2;
+        transition: .3s;
+      }
+      i {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        line-height: 32px;
+        height: 32px;
+        transition: 0.3s;
+        color: #909399;
+      }
+      .openStatu {
+        transform: rotate(180deg);
+        right: 16px;                
+      }
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px 5px inset;
+        span{
+          opacity: .8;
+        }
+      }
+    }
+  }
+  .hideSidebar {
+    .sidebar-container{
+      width: 36px!important;
+    }
+    .main-container {//影响了整体布局
+      left: 36px;
+    }
+    .submenu-title-noDropdown {
+      padding-left: 10px!important;
+      // position: relative;
+      // span {
+      //   visibility: hidden;
+      // }
+    }
+    .el-submenu {
+      &>.el-submenu__title {
+        padding-left: 10px!important;
+        // &>span {
+        //   visibility: hidden;
+        // }
+        // .el-submenu__icon-arrow {
+        //   display: none;
+        // }
+      }
+      // .nest-menu {
+        // .el-submenu__icon-arrow {
+          // display: block!important;
+        // }
+        // span {
+          // display: inline-block!important;
+        // }
+      // }
+    }
+  }
+  .nest-menu .el-submenu>.el-submenu__title,
+  .el-submenu .el-menu-item {
+    background-color: $subMenuBg!important;
+    &:hover{
+      background-color: $menuHover!important;
+    }
+  }
+  // .el-menu--collapse .el-menu .el-submenu{
+    // width: 180px!important;
+  // }
+}

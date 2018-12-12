@@ -1,0 +1,313 @@
+/*---------此文件不能更改------------*/
+ /* -------tile-menu--------- */
+  $tile-menu-transition: all 0.4s;                           /*-------平铺式菜单组件动画过度效果-------*/
+  $tile-menu-top: 20px;                           /*-------平铺式菜单组件距上侧距离-------*/
+  $tile-menu-left: 64px;                           /*-------平铺式菜单组件距左侧距离-------*/
+  $tile-menu-right: 40px;                           /*-------平铺式菜单组件距右侧距离-------*/
+  $tile-menu-font-color: #333;                           /*-------平铺式菜单组件字体颜色-------*/
+  $tile-menu-bg-color: transparent;                             /*-------平铺式菜单组件背景色-------*/
+  $tile-menu-font-size: 20px;                            /*-------平铺式菜单组件字体大小-------*/
+  $tile-menu-border: none;                          /*-------平铺式菜单组件边框-------*/
+  $tile-menu-border-radius: 0;                          /*-------平铺式菜单组件圆角大小-------*/
+  $tile-column-margin-right: 24px;                          /*-------平铺式菜单组件菜单列右边距-------*/ 
+  $tile-column-border: none;                          /*-------平铺式菜单组件菜单列边框-------*/
+  $tile-column-border-radius: 0;                          /*-------平铺式菜单组件菜单列圆角大小-------*/ 
+  $tile-group-margin-bottom: 8px;                          /*-------平铺式菜单组件菜单组下边距-------*/
+  $tile-group-border: none;                          /*-------平铺式菜单组件菜单组边框-------*/
+  $tile-group-border-radius: 0;                          /*-------平铺式菜单组件菜单组圆角大小-------*/ 
+  $tile-group-box-shadow: none;                          /*-------平铺式菜单组件菜单组阴影效果-------*/
+  $tile-header-font-color: #fff;                          /*-------平铺式菜单组件菜单组header字体颜色-------*/
+  $tile-header-font-size: 24px;                             /*-------平铺式菜单组件菜单组header字体大小-------*/
+  $tile-header-border-top: none;                          /*-------平铺式菜单组件菜单组header上边框-------*/
+  $tile-header-border-right: none;                          /*-------平铺式菜单组件菜单组header右边框-------*/
+  $tile-header-border-bottom: none;                          /*-------平铺式菜单组件菜单组header下边框-------*/
+  $tile-header-border-left: none;                          /*-------平铺式菜单组件菜单组header左边框-------*/
+  $tile-header-border-radius: 6px;                             /*-------平铺式菜单组件菜单组header圆角大小-------*/
+  $tile-header-height: 50px;                             /*-------平铺式菜单组件菜单组header高度-------*/
+  $tile-header-margin-bottom: 8px;                             /*-------平铺式菜单组件菜单组header下侧外边距-------*/
+  $tile-header-title-margin-left: 30px;                          /*-------平铺式菜单组件菜单组header中标题左边距-------*/
+  $tile-header-expand-font-size: 16px;                          /*-------平铺式菜单组件菜单组header中更多/收起标签字体大小-------*/
+  $tile-header-expand-icon-height: 18px;                          /*-------平铺式菜单组件菜单组header中更多/收起图标高度-------*/
+  $tile-header-expand-icon-margin: 0 30px 0 8px;                          /*-------平铺式菜单组件菜单组header中更多/收起图标边距-------*/
+  $tile-list-font-color: #333;                           /*-------平铺式菜单组件菜单项列表字体颜色-------*/
+  $tile-list-bg-color: transparent;                             /*-------平铺式菜单组件菜单项列表背景色-------*/
+  $tile-list-font-size: 14px;                            /*-------平铺式菜单组件菜单项列表字体大小-------*/
+  $tile-list-border: none;                          /*-------平铺式菜单组件菜单项列表边框-------*/
+  $tile-list-border-radius: 6px;                             /*-------平铺式菜单组件菜单项列表圆角大小-------*/
+  $tile-block-font-size: 28px;                              /*-------平铺式菜单组件单项菜单组字体大小-------*/
+  $tile-block-font-color: #fff;                              /*-------平铺式菜单组件单项菜单组字体颜色-------*/
+  $tile-block-width: 100%;                              /*-------平铺式菜单组件单项菜单组宽度-------*/
+  $tile-block-height: 130px;                              /*-------平铺式菜单组件单项菜单组高度-------*/
+  $tile-block-border: none;                          /*-------平铺式菜单组件单项菜单组边框-------*/
+  $tile-block-border-radius: 6px;                              /*-------平铺式菜单组件单项菜单组圆角大小-------*/
+  $tile-block-text-align: center;                              /*-------平铺式菜单组件单项菜单组中文字对齐方式-------*/
+  $tile-block-title-margin: 24px;                              /*-------平铺式菜单组件单项菜单组标题与图标间距离-------*/
+  $tile-item-bg-color: #fff;                             /*-------平铺式菜单组件菜单项背景色-------*/
+  $tile-item-font-size: 20px;                            /*-------平铺式菜单组件菜单项字体大小-------*/
+  $tile-item-font-color: #333;                           /*-------平铺式菜单组件菜单项字体颜色-------*/
+  $tile-item-border-right: none;                             /*-------平铺式菜单组件菜单项右边框-------*/ 
+  $tile-item-border-bottom: none;                             /*-------平铺式菜单组件菜单项下边框-------*/ 
+  $tile-item-border-radius: 6px;                             /*-------平铺式菜单组件菜单项圆角大小-------*/ 
+  $tile-item-inner-active-border-radius: 6px;                             /*-------平铺式菜单组件菜单项之间无间距时按下效果的圆角大小-------*/
+  $tile-item-text-align: center;                              /*-------平铺式菜单组件菜单项中文字对齐方式-------*/
+  $tile-item-icon-margin-bottom: 10px;                              /*-------平铺式菜单组件菜单项中图标下边距-------*/
+  $tile-item-disable-bg-grayscale: 1;                              /*-------平铺式菜单组件菜单项禁用时背景灰度级-------*/
+  $tile-item-active-bg-grayscale: 0.3;                              /*-------平铺式菜单组件菜单项按下时背景灰度级-------*/
+  $tile-dialog-font-color: #333;                           /*-------平铺式菜单组件对话框字体颜色-------*/
+  $tile-dialog-bg-color: transparent;                             /*-------平铺式菜单组件对话框背景色-------*/
+  $tile-dialog-font-size: 20px;                            /*-------平铺式菜单组件对话框字体大小-------*/
+  $tile-dialog-border: none;                            /*-------平铺式菜单组件对话框边框-------*/
+  $tile-dialog-border-radius: 0;                            /*-------平铺式菜单组件对话框圆角大小-------*/
+  $tile-dialog-header-font-color: #fff;                          /*-------平铺式菜单组件对话框header字体颜色-------*/
+  $tile-dialog-header-font-size: 24px;                             /*-------平铺式菜单组件对话框header字体大小-------*/
+  $tile-dialog-header-border-top: none;                          /*-------平铺式菜单组件对话框header上边框-------*/
+  $tile-dialog-header-border-right: none;                          /*-------平铺式菜单组件对话框header右边框-------*/
+  $tile-dialog-header-border-bottom: 1px dashed rgba(0, 0, 0, .4);                          /*-------平铺式菜单组件对话框header下边框-------*/
+  $tile-dialog-header-border-left: none;                          /*-------平铺式菜单组件对话框header左边框-------*/
+  $tile-dialog-header-border-radius: 0;                             /*-------平铺式菜单组件对话框header圆角大小-------*/
+  $tile-dialog-header-height: 89px;                             /*-------平铺式菜单组件对话框header高度-------*/
+  $tile-dialog-header-text-align: center;                              /*-------平铺式菜单组件对话框header中文字对齐方式-------*/
+  $tile-dialog-list-bg-color: #fff;                              /*-------平铺式菜单组件对话框菜单项列表背景色-------*/
+  $tile-dialog-list-border: none;                          /*-------平铺式菜单组件对话框菜单项列表边框-------*/
+  $tile-dialog-list-border-radius: 0;                             /*-------平铺式菜单组件对话框菜单项列表圆角大小-------*/
+  $tile-dialog-item-width: 184px;                              /*-------平铺式菜单组件对话框菜单项宽度-------*/
+  $tile-dialog-item-height: 119px;                              /*-------平铺式菜单组件对话框菜单项高度-------*/
+  $tile-dialog-item-magin: 25px 0;                              /*-------平铺式菜单组件对话框菜单项外边距-------*/
+  $tile-dialog-item-bg-color: #fff;                             /*-------平铺式菜单组件对话框菜单项背景色-------*/
+  $tile-dialog-item-font-size: 20px;                            /*-------平铺式菜单组件对话框菜单项字体大小-------*/
+  $tile-dialog-item-font-color: #333;                           /*-------平铺式菜单组件对话框菜单项字体颜色-------*/
+  $tile-dialog-item-border-bottom: 1px solid #D8DDE5;                          /*-------平铺式菜单组件对话框菜单项下边框-------*/
+  $tile-dialog-item-border-right: 1px solid #D8DDE5;                          /*-------平铺式菜单组件对话框菜单项右边框-------*/
+  $tile-dialog-item-content-width: 164px;                              /*-------平铺式菜单组件对话框菜单项内容块宽度-------*/
+  $tile-dialog-item-content-height: 150px;                              /*-------平铺式菜单组件对话框菜单项内容块高度-------*/
+  $tile-dialog-item-content-top: 10px;                              /*-------平铺式菜单组件对话框菜单项内容块距外层上边距-------*/
+  $tile-dialog-item-content-left: 10px;                              /*-------平铺式菜单组件对话框菜单项内容块距外层左边距-------*/
+  $tile-dialog-item-content-text-align: center;                              /*-------平铺式菜单组件对话框菜单项中文字对齐方式-------*/
+  $tile-dialog-item-content-icon-magin: 20px 0;                              /*-------平铺式菜单组件对话框菜单项图标外边距-------*/
+  $tile-min-height:520px;
+.tile-menu, .before-animation, .after-animation, .tile-group, .tile-list {
+  transition: $tile-menu-transition ;
+}
+
+.tile-menu {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  min-height:$tile-min-height;
+  font-size: $tile-menu-font-size ;
+  background: $tile-menu-bg-color;
+  color: $tile-menu-font-color;
+  border: $tile-menu-border;
+  border-radius: $tile-menu-border-radius ;
+}
+
+.tile-menu::-webkit-scrollbar {
+  width: 0;
+}
+
+.tile-menu div {
+  box-sizing: border-box;
+}
+
+.tile-menu-wrapper {
+  position: absolute;
+  top:$tile-menu-top;
+  left:  $tile-menu-left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-right: $tile-menu-right;
+}
+
+.before-animation, .after-animation {
+  width: 0px;
+}
+.tile-column {
+  display: flex;
+  float:left\9;//ie9
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-right:$tile-column-margin-right;
+  border: $tile-column-border;
+  border-radius:$tile-column-border-radius;
+}
+.tile-group {
+  margin-bottom:$tile-group-margin-bottom ;
+  border:$tile-group-border;
+  border-radius: $tile-group-border-radius ;
+  box-shadow:$tile-group-box-shadow ;
+}
+
+.tile-group-header {
+  position:relative\9;//ie9
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color:$tile-header-font-color;
+  border-top:$tile-header-border-top;
+  border-right: $tile-header-border-right ;
+  border-bottom:$tile-header-border-bottom ;
+  border-left: $tile-header-border-left;
+  border-radius:$tile-header-border-radius ;
+  line-height:$tile-header-height ;
+  margin-bottom:$tile-header-margin-bottom;
+}
+
+.tile-group-header-title {
+  margin-left:$tile-header-title-margin-left ;
+  font-size: $tile-header-font-size ;
+}
+
+.tile-group-header-expand {
+  font-size: $tile-header-expand-font-size ;
+  position: absolute\9;
+  top:0px\9;
+  right:0px\9;
+}
+
+.tile-group-header-expand-icon {
+  vertical-align: middle;
+  height: $tile-header-expand-icon-height ;
+  margin: $tile-header-expand-icon-margin ;
+}
+
+.tile-list {
+  overflow: hidden;
+  position: relative;
+  font-size:$tile-list-font-size ;
+  background: $tile-list-bg-color ;
+  color: $tile-list-font-color ;
+  border: $tile-list-border;
+  border-radius: $tile-list-border-radius;
+}
+
+.tile-block {
+  text-align: $tile-block-text-align ;
+  font-size: $tile-block-font-size ;
+  color: $tile-block-font-color ;
+  width: $tile-block-width ;
+  height:$tile-block-height ;
+  line-height:$tile-block-height;
+  border: $tile-block-border ;
+  border-radius: $tile-block-border-radius;
+}
+
+.tile-block-icon {
+  vertical-align: middle;
+}
+
+.tile-block-title {
+  margin-left:$tile-block-title-margin ;
+}
+
+.tile-item {
+  position: absolute;  
+  background: $tile-item-bg-color ;
+  border-bottom: $tile-item-border-bottom ;
+  border-radius: $tile-item-border-radius ;
+}
+
+.tile-item-inner-wrapper {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right:$tile-item-border-right ;  
+}
+
+.tile-item-active-wrapper {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius:$tile-item-inner-active-border-radius ;
+}
+
+.tile-item-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: $tile-item-text-align;
+}
+
+.tile-item-icon {
+  margin-bottom:$tile-item-icon-margin-bottom ;
+}
+
+.tile-item-text {
+  
+}
+
+.tile-item-disable {
+  filter: grayscale($tile-item-disable-bg-grayscale);
+}
+
+.item-with-active:active {
+  filter: grayscale($tile-item-active-bg-grayscale);
+}
+
+.tile-dialog {
+  font-size: $tile-dialog-font-size ;
+  background: $tile-dialog-bg-color ;
+  color: $tile-dialog-font-color;
+  border:$tile-dialog-border ;
+  border-radius:$tile-dialog-border-radius;
+}
+
+.tile-dialog div {
+  box-sizing: border-box;
+}
+
+.tile-dialog-header {
+  width: 100%;
+  line-height: $tile-dialog-header-height ;
+  text-align: $tile-dialog-header-text-align ;
+  font-size: $tile-dialog-header-font-size;
+  color: $tile-dialog-header-font-color ;
+  border-top: $tile-dialog-header-border-top ;
+  border-right:$tile-dialog-header-border-right ;
+  border-bottom: $tile-dialog-header-border-bottom ;
+  border-left: $tile-dialog-header-border-left;
+  border-radius:$tile-dialog-header-border-radius;
+}
+
+.tile-dialog-list {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: $tile-dialog-list-bg-color;
+  border: $tile-dialog-list-border ;
+  border-radius: $tile-dialog-list-border-radius ;
+}
+
+.tile-dialog-item-wrapper {
+  position: relative;
+  border-bottom: $tile-dialog-item-border-bottom;
+}
+
+.tile-dialog-item {
+  width:$tile-dialog-item-width;
+  height: $tile-dialog-item-height ;
+  margin: $tile-dialog-item-magin ;
+  font-size:$tile-dialog-item-font-size ;
+  background: $tile-dialog-item-bg-color ;
+  color:$tile-dialog-item-font-color;
+  border-right: $tile-dialog-item-border-right;  
+}
+
+.tile-dialog-item-content {
+  position: absolute;
+  top: $tile-dialog-item-content-top;
+  left: $tile-dialog-item-content-left ;
+  width:$tile-dialog-item-content-width ;
+  height: $tile-dialog-item-content-height;
+}
+
+.tile-dialog-item-content {
+  text-align: $tile-dialog-item-content-text-align;
+}
+
+.tile-dialog-item-content-icon {
+  margin:$tile-dialog-item-content-icon-magin;
+}

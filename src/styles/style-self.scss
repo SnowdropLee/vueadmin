@@ -1,0 +1,35 @@
+//重写elementUI的样式
+//table
+//table header
+.tableHeaderClass {
+  background: #f7f7f7 !important;
+}
+//table margin-gop
+.tableMarginTop{
+  margin-top:20px;
+}
+//表格查询页面搜多按钮
+.searchBtnMarginTop{
+  margin-top: 38px;
+}
+
+//el-table原本有一根底线加了border之后会有俩跟底线
+// .el-table::before{
+//   height:0;
+// }
+.el-form-item{
+  margin-left:0 !important;
+}
+
+//重写eelementUI 的message
+.el-message{
+  top:60px;
+}
+
+// select、cascader下拉框宽度重写100%
+.el-select{
+  width: 100%;
+}
+.el-cascader{
+  width: 100%;
+}
