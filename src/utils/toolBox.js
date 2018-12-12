@@ -76,10 +76,14 @@ const main = {
     var date = new Date(str)
     var Y = date.getFullYear() + '-';
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var D = date.getDate() + ' ';
-    var h = date.getHours() + ':';
-    var m = date.getMinutes() + ':';
-    var s = date.getSeconds();
+    // var D = date.getDate() + ' ';
+    var D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' '
+    // var h = date.getHours() + ':';
+    // var m = date.getMinutes() + ':';
+    // var s = date.getSeconds();
+    var h = (date.getHours()) < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':'
+    var m = (date.getHours()) < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':'
+    var s = (date.getHours()) < 10 ? '0' + date.getHours() : date.getHours()
     return Y + M + D + h + m + s;
   },
   // 根据key将数组变成hash
