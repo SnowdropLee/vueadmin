@@ -59,7 +59,7 @@ export default {
             this.loading = false;
             this.roleList = [];
             let temp = response.RSP_BODY.perssionTreeSpinner;
-            console.log(response)
+            // console.log(response)
             for (let i = 0; i < temp.length; i++) {
               if (
                 temp[i].AUMSChannel ==

@@ -270,7 +270,7 @@ export const asyncRouterMap = [
     meta: {
       title: '版本管理',
       icon: 'version',
-      roles: ['Menu_VersionFileUpload', 'Menu_VersionReleaseList', 'Menu_VersionRetreat', 'Menu_VersionReleaseHistory', 'Menu_VersionTemplateMaintenance']
+      roles: ['Menu_VersionFileUpload', 'Menu_VersionFileUpload2', 'Menu_VersionReleaseList', 'Menu_VersionRetreat', 'Menu_VersionReleaseHistory', 'Menu_VersionTemplateMaintenance']
     },
     children: [
       {
@@ -288,7 +288,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/version-manage/version-file-upload2/versionFileUpload'),
         meta: {
           title: '版本文件管理(分行)',
-          roles: ['Menu_VersionFileUpload']
+          roles: ['Menu_VersionFileUpload2']
         }
       },
       {
