@@ -73,7 +73,9 @@ const main = {
   },
   // 13位时间戳转化为日期
   timestampToTime(str) {
-    var date = new Date(str)
+    var s = Date.parse(str.replace(/-/g, '/'))
+    var date = new Date(s)
+    // var date = new Date(str)
     var Y = date.getFullYear() + '-';
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     // var D = date.getDate() + ' ';
@@ -82,8 +84,8 @@ const main = {
     // var m = date.getMinutes() + ':';
     // var s = date.getSeconds();
     var h = (date.getHours()) < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':'
-    var m = (date.getHours()) < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':'
-    var s = (date.getHours()) < 10 ? '0' + date.getHours() : date.getHours()
+    var m = (date.getMinutes()) < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':'
+    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
     return Y + M + D + h + m + s;
   },
   // 根据key将数组变成hash
