@@ -21,7 +21,7 @@
               </el-col> -->
                 <el-col :span="12">
                   <el-form-item label="版本编号 : " prop="versionCode">
-                    <el-select v-model="form.versionCode" placeholder="请选择版本编号">
+                    <el-select v-model="form.versionCode" placeholder="请选择版本编号" clearable>
                       <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
                       </el-option>
                     </el-select>
@@ -228,7 +228,7 @@ export default {
       let resBody = new spinnerDataList();
       resBody.data.spinnerList = [
         { spinnerName: "branch" },
-        { spinnerName: "verBaseInfo" },
+        { spinnerName: "branchVerBaseInfo" },
         { spinnerName: "branchArea" }
       ];
       request(resBody)
