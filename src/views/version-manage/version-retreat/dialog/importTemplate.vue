@@ -111,6 +111,7 @@ export default {
       resBody.QueryPageNo = this.currentPage;
       request(resBody)
       .then(response=>{
+        console.log(response)
         if(response.SYS_HEAD.ReturnCode === "000000") {
           this.loading = false;
           this.tableData=response.RSP_BODY.verRollbackDevInfoList||[];

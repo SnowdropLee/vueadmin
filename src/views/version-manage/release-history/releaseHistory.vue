@@ -5,7 +5,7 @@
         <el-row :gutter="10">
           <el-col :md="6" :lg="4">
             <el-form-item label="版本编号" prop="versionCode">
-              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询">
+              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable>
                 <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
                 </el-option>
               </el-select>
@@ -89,13 +89,15 @@ export default {
   },
   created() {
     this.initSpinnerList();
+    this.queryInfoList()
   },
   methods: {
     initSpinnerList() {
       let resBody = new spinnerDataQuery();
-      resBody.data.spinnerList = [{ spinnerName: "verBaseInfo" }];
+      resBody.data.spinnerList = [{ spinnerName: "branchVerBaseInfo" }];
       request(resBody)
         .then(response => {
+          // console.log(response)
           this.verBaseInfo = response.RSP_BODY.verBaseInfoSpinner || [];
           // this.verBaseInfo.unshift({});
         })
@@ -130,6 +132,7 @@ export default {
       resBody.QueryPageNo = this.currentPage;
       request(resBody)
         .then(response => {
+          // console.log(response)
           if (response.SYS_HEAD.ReturnCode === "000000") {
             this.loading = false;
             this.tableData = response.RSP_BODY.verUpdateLogInfoList || [];
