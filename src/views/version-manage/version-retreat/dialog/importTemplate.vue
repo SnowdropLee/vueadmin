@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="版本回退" width="700px"
+  <el-dialog title="版本回退" width="70%"
     :lock-scroll=false
     :close-on-click-modal=false
     :visible.sync="isShow"
@@ -26,10 +26,10 @@
           header-row-class-name="tableHeaderClass"
           border>
             <el-table-column type="selection" width="40"></el-table-column>
-            <el-table-column fixed prop="devNum" label="机具编号" width="120"></el-table-column>
-            <el-table-column prop="branchNo" label="机构号" width="150"> </el-table-column>
-            <el-table-column prop="versionCode" label="当前版本" width="120"> </el-table-column>
-            <el-table-column prop="upperVersionCode" label="上一版本" min-width="120"> </el-table-column>
+            <el-table-column fixed prop="devNum" label="机具编号" width="330"></el-table-column>
+            <el-table-column prop="branchNo" label="机构号" width="130"> </el-table-column>
+            <el-table-column prop="versionCode" label="当前版本" min-width="100"> </el-table-column>
+            <el-table-column prop="upperVersionCode" label="上一版本" min-width="100"> </el-table-column>
           </el-table>
           <el-pagination
             style="text-align: right;margin-top:20px;"
