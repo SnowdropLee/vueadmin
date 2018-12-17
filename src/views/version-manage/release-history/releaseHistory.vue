@@ -40,12 +40,12 @@
 
     <el-card>
       <el-table :data="tableData" header-row-class-name="tableHeaderClass" border>
-        <el-table-column fixed prop="devNum" label="设备编号" width="100"></el-table-column>
-        <el-table-column prop="versionCode" label="版本编号" width="150"></el-table-column>
-        <el-table-column prop="verUpdateCreateTime" :formatter="dtFormat" label="初始发布时间" width="180"></el-table-column>
-        <el-table-column prop="verUpdateUpdateTime" :formatter="dtFormat" label="更新汇报时间" width="180"></el-table-column>
-        <el-table-column prop="adDescription" label="版本描述" width="150"></el-table-column>
-        <el-table-column prop="adStatus" :formatter="Format" label="版本操作结果" width="150"></el-table-column>
+        <el-table-column fixed prop="devNum" label="设备编号" min-width="100"></el-table-column>
+        <el-table-column prop="versionCode" label="版本编号" width="250"></el-table-column>
+        <el-table-column prop="verUpdateCreateTime" :formatter="dtFormat" label="初始发布时间" width="230"></el-table-column>
+        <el-table-column prop="verUpdateUpdateTime" :formatter="dtFormat" label="更新汇报时间" width="230"></el-table-column>
+        <el-table-column prop="adDescription" label="版本描述" width="200"></el-table-column>
+        <el-table-column prop="adStatus" :formatter="Format" label="版本操作结果" width="200"></el-table-column>
         <el-table-column prop="remark" label="备注" min-width="150"></el-table-column>
       </el-table>
 
