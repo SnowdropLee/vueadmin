@@ -149,6 +149,7 @@ export const asyncRouterMap = [
       roles: ['Menu_UserInfoManage', 'Menu_RoleInfoManage']
     },
     children: [
+      // 用户管理
       {
         path: 'UserInfoManage',
         name: 'user-info-manage',
@@ -158,14 +159,36 @@ export const asyncRouterMap = [
           roles: ['Menu_UserInfoManage']
         }
       },
+      // 用户角色权限管理
       {
-        path: 'roleInfoManage',
+        path: '/userManage/roleInfoManage',
         name: 'role-info-manage',
-        component: () => import('@/views/user-manage/role-info-manage/roleInfoManage'),
+        // component: () => import('@/views/user-manage/role-info-manage/roleInfoManage'),
+        component: () => import('@/views/user-manage/role-info-manage/index'),
         meta: {
-          title: '角色管理',
+          title: '用户角色权限管理',
           roles: ['Menu_RoleInfoManage']
-        }
+        },
+        children: [
+          // 系统角色权限管理
+          {
+            path: 'sysInfoManage',
+            name: 'sys-info-manage',
+            component: () => import('@/views/user-manage/sys-info-manage/sysInfoManage.vue'),
+            meta: {
+              title: '系统角色权限管理'
+            }
+          },
+          // IDE权限管理
+          {
+            path: 'IDEInfoManage',
+            name: 'IDE-info-manage',
+            component: () => import('@/views/user-manage/ide-info-manage/ideInfoManage.vue'),
+            meta: {
+              title: 'IDE角色权限管理'
+            }
+          }
+        ]
       }
     ]
   },
@@ -341,6 +364,7 @@ export const asyncRouterMap = [
       roles: ['Menu_AdvertisingManage', 'Menu_MenuManage']
     },
     children: [
+      // 广告 '/resourceManage/advertising'
       {
         path: '/resourceManage/advertising',
         component: () => import('@/views/resource-manage/index'),
@@ -378,6 +402,7 @@ export const asyncRouterMap = [
           }
         ]
       },
+      // 菜单 '/resourceManage/menu'
       {
         path: '/resourceManage/menu',
         component: () => import('@/views/resource-manage/index'),

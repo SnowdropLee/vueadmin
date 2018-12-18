@@ -73,6 +73,7 @@ const user = {
         resBody.data.loginPassword = loginPassword
         request(resBody)
           .then(response => {
+            
             if (response.SYS_HEAD.ReturnCode === '000000') {
               const data = response.SYS_HEAD
               setToken(data.aumsToken)
@@ -97,6 +98,7 @@ const user = {
         const resBody = new GetInfo()
         resBody.data.userId = state.userId
         request(resBody).then(response => {
+          
           if (response.SYS_HEAD.ReturnCode === '000000') {
             const data = response.RSP_BODY
             // if (data.menuElementKeyList && data.menuElementKeyList.length > 0) { // 验证返回的roles是否是一个非空数组

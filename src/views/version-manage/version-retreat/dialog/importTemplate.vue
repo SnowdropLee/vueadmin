@@ -28,6 +28,7 @@
             <el-table-column type="selection" width="40"></el-table-column>
             <el-table-column fixed prop="devNum" label="机具编号" width="330"></el-table-column>
             <el-table-column prop="branchNo" label="机构号" width="130"> </el-table-column>
+            <el-table-column prop="branchName" label="机构名称" width="130"> </el-table-column>
             <el-table-column prop="versionCode" label="当前版本" min-width="100"> </el-table-column>
             <el-table-column prop="upperVersionCode" label="上一版本" min-width="100"> </el-table-column>
           </el-table>
@@ -165,7 +166,7 @@ export default {
         this.form[key]=this.option.currentRow[key]
       }
       this.queryDevinfoList();
-      console.log(this.form);
+      // console.log(this.form);
     }
   }
 }
