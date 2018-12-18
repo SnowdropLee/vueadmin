@@ -1,15 +1,29 @@
-import { Login, logout, GetInfo } from '@/message/login/login'
 import {
-  getToken, setToken, removeToken,
-  getUserId, setUserId,
-  getUserName, setUserName,
-  getUserNo, setUserNo,
-  getBranchId, setBranchId,
-  getBranchName, setBranchName,
-  getBranchNo, setBranchNo,
+  Login,
+  logout,
+  GetInfo
+} from '@/message/login/login'
+import {
+  getToken,
+  setToken,
+  removeToken,
+  getUserId,
+  setUserId,
+  getUserName,
+  setUserName,
+  getUserNo,
+  setUserNo,
+  getBranchId,
+  setBranchId,
+  getBranchName,
+  setBranchName,
+  getBranchNo,
+  setBranchNo,
   setMenu,
-  getButton, setButton,
-  getIsFirstLoginFLag, setIsFirstLoginFLag
+  getButton,
+  setButton,
+  getIsFirstLoginFLag,
+  setIsFirstLoginFLag
 } from '@/utils/auth'
 import md5 from 'js-md5';
 import request from '@/utils/request'
@@ -64,7 +78,9 @@ const user = {
 
   actions: {
     // 登录
-    Login({ commit }, userInfo) {
+    Login({
+      commit
+    }, userInfo) {
       const userNo = userInfo.username.trim()
       const loginPassword = md5(userInfo.password).toUpperCase()
       return new Promise((resolve, reject) => {
@@ -73,7 +89,6 @@ const user = {
         resBody.data.loginPassword = loginPassword
         request(resBody)
           .then(response => {
-            
             if (response.SYS_HEAD.ReturnCode === '000000') {
               const data = response.SYS_HEAD
               setToken(data.aumsToken)
@@ -93,12 +108,15 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo({ commit, state }) {
+    GetInfo({
+      commit,
+      state
+    }) {
       return new Promise((resolve, reject) => {
         const resBody = new GetInfo()
         resBody.data.userId = state.userId
         request(resBody).then(response => {
-          
+
           if (response.SYS_HEAD.ReturnCode === '000000') {
             const data = response.RSP_BODY
             // if (data.menuElementKeyList && data.menuElementKeyList.length > 0) { // 验证返回的roles是否是一个非空数组
@@ -135,7 +153,10 @@ const user = {
     },
 
     // 登出
-    LogOut({ commit, state }) {
+    LogOut({
+      commit,
+      state
+    }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
@@ -148,7 +169,9 @@ const user = {
     },
 
     // 前端 登出
-    FedLogOut({ commit }) {
+    FedLogOut({
+      commit
+    }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         commit('SET_MENU', [])
@@ -159,7 +182,9 @@ const user = {
     },
 
     // sso
-    SSOLogin({ commit }, view) {
+    SSOLogin({
+      commit
+    }, view) {
       commit('SET_USERID', view.userId)
       commit('SET_TOKEN', view.aumsToken)
     }

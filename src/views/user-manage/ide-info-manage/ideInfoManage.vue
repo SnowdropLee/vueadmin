@@ -14,7 +14,7 @@
               <el-button type="primary" size="mini"  @click="dialogOptionsAdd.isShow=true;dialogOptionsAdd.active=0;dialogOptionsAdd.aumsSystem='002';"  v-if="btnPermission('Button_Role_Add')">新建角色</el-button>
               <el-button type="danger"  :disabled="isDisabledDel" size='mini' @click="delRoleClick"  v-if="btnPermission('Button_Role_Delete')">删除角色</el-button>
             </el-tab-pane> -->
-            <el-tab-pane label="自助C端管理员">
+            <el-tab-pane label="IDE角色权限管理">
               <div class="contentRole">
               <el-radio-group v-model="selRole" size="mini">
                 <el-radio :label="item.roleId"  @change="roleChange(item)"  border v-for="item in  roleNameC" :key="item.id">{{item.roleName}}</el-radio>

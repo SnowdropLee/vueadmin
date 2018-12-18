@@ -5,7 +5,7 @@
         <el-card class="rolePannel">
           <!-- <el-card  v-loading="loading"> -->
           <el-tabs type="border-card">
-            <el-tab-pane label="自助V端角色">
+            <el-tab-pane label="系统角色权限管理">
               <div class="contentRole">
                 <el-radio-group v-model="selRole" size="mini">
                   <el-radio :label="item.roleId"  @change="roleChange(item)" border v-for="item in  roleNameV" :key="item.id">{{item.roleName}}</el-radio> 
