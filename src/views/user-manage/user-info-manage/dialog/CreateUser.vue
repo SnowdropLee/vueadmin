@@ -15,23 +15,31 @@
         <el-form size="mini" ref="newUserDate" :model="newUserDate" :rules="rules" inline label-width="120px" label-position="left">
           <el-row :gutter="10">
             <el-col :span="12">
-                <el-form-item prop="branchId" label="所属机构:" >
-                <select-tree :single-check="true" v-model="newUserDate.branchId" style="min-width:170px;"
-                :props='{id:"branchId",label: "branchName",children: "childBranch"}' :tree-data="brno" :node-key="'branchId'" ></select-tree>
+                <el-form-item prop="userIdNo" label="用户ID:" >
+                <el-input v-model="newUserDate.userIdNo"
+                          placeholder="请输入用户名称"
+                          maxlength="20"
+                          ></el-input>
                 </el-form-item> 
             </el-col>
-            <el-col :span="8" >
-              <el-form-item prop="childBranchUseFlag" label="可否管理子机构:">
-               <el-switch v-model="newUserDate.childBranchUseFlag"></el-switch>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="10"> 
             <el-col :span="12" > 
               <el-form-item prop="userName" label="用户名称:">
                   <el-input v-model="newUserDate.userName"
                           placeholder="请输入用户名称"></el-input>
               </el-form-item>
+            </el-col>
+            <!-- <el-col :span="8" >
+              <el-form-item prop="childBranchUseFlag" label="可否管理子机构:">
+               <el-switch v-model="newUserDate.childBranchUseFlag"></el-switch>
+              </el-form-item>
+            </el-col> -->
+          </el-row>
+          <el-row :gutter="10"> 
+            <el-col :span="12">
+                <el-form-item prop="branchId" label="所属机构:" >
+                <select-tree :single-check="true" v-model="newUserDate.branchId" style="min-width:170px;"
+                :props='{id:"branchId",label: "branchName",children: "childBranch"}' :tree-data="brno" :node-key="'branchId'" ></select-tree>
+                </el-form-item> 
             </el-col>
              <el-col  :span="12">
               <el-form-item prop="jobNumber" label="工号:">                  
@@ -131,14 +139,15 @@ export default {
       brno: [],
       active: 0,
       newUserDate: {//表单信息
+        userIdNo:"",//用户ID
         userID: "",
-        userName: "",
-        branchId: [],
+        userName: "", //用户名称
+        branchId: [], //所属机构
         remark: "",
-        tellerNo: "",
-        jobNumber: "",
-        telephone: "",
-        emailAddress: "",
+        tellerNo: "", //柜员号
+        jobNumber: "", //工号
+        telephone: "", //手机号
+        emailAddress: "", //邮箱
         childBranchUseFlag: false
       },
       startDialogVisible: false,
@@ -146,6 +155,10 @@ export default {
       dialogOptions: { isShow: false, isClick: false, UserID: "" },
       dialogOptionsUserRole: { isShow: false, userId: "" },
       rules: {//校验对象
+        userIdNo: [
+          {max: 20, trigger: "blur", message: "用户ID长度少于20个字符"},
+          {required: true, message: "请输入用户ID", trigger: "blur"}
+        ],
         // userID: [
         //   { required: true, message: "请输入用户编号", trigger: "blur" }
         // ],
@@ -166,7 +179,7 @@ export default {
           { require: false, validator: validatorEmail, trigger: "blur" }
         ],
         jobNumber: [
-          { required: true, message: "请输入工号", trigger: "blur" },
+          { required: false, message: "请输入工号", trigger: "blur" },
           {
             max: 20,
             message: "请输入正确工号，长度少于20个字符",
@@ -174,7 +187,7 @@ export default {
           }
         ],
         tellerNo: [
-          { required: true, message: "请输入柜员号", trigger: "blur" },
+          { required: false, message: "请输入柜员号", trigger: "blur" },
           {
             max: 20,
             message: "请输入正确柜员号，长度少于20个字符",
@@ -241,6 +254,7 @@ export default {
           this.loading = true;
           this.dialogOptions.isShow = true;
           let resBody = new createUser();
+          resBody.data.userIdNo = this.newUserDate.userIdNo;
           resBody.data.userName = this.newUserDate.userName;
           resBody.data.branchId = this.newUserDate.branchId[0];
           resBody.data.remark = this.newUserDate.remark;
