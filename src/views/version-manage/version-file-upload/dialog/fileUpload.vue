@@ -4,6 +4,11 @@
     <div v-loading="loading" element-loading-text="拼命加载中">
       <el-card>
         <el-form :model="form" :rules="rules" ref="form" size="mini" label-width="80px" label-position="left">
+          <el-form-item label="版本编号" prop="versionCode">
+            <el-input v-model="versionCode" placeholder="请输入版本编号">
+            </el-input>
+          </el-form-item>
+
           <el-form-item label="文件上传" prop="filename">
             <el-upload ref="upload" :action=fileUrl :on-change="versionIsExistChange" :limit="1" :on-exceed="handleExceed" :on-success="successCallback" :on-remove="delfile" accept=".zip" :auto-upload="false">
               <el-button size="mini" plain type="primary">选择上传文件</el-button>
@@ -11,10 +16,7 @@
             </el-upload>
           </el-form-item>
 
-          <el-form-item label="版本编号" prop="versionCode">
-            <el-input v-model="versionCode" auto-complete="off" disabled placeholder="版本编号自动填入">
-            </el-input>
-          </el-form-item>
+          
 
           <el-form-item label="版本策略" prop="strategy_Id">
             <el-select v-model="form.strategy_Id" placeholder="请选择版本操作结果">
@@ -69,13 +71,14 @@ export default {
       },
       urlAddress: "", // 上传地址
       uploadFileName: "", //上传文件名
-      versionCode: "", // 版本号
+      versionCode: "", // 版本编号
       devSortOptions: [],
       verOptionsTemplate: [],
       fileUrl: "",  // 版本上传地址
       
       // 校验规则
       rules: {
+        
         filename: [
           { required: true, validator: validatefile, trigger: "change" }
         ],
