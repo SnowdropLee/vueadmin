@@ -28,12 +28,12 @@
             </el-input>
           </el-form-item>
 
-          <el-form-item label="主版本号" prop="mainVersionCode">
+          <!-- <el-form-item label="主版本号" prop="mainVersionCode">
             <el-select v-model="form.mainVersionCode" placeholder="请选择主版本号">
               <el-option v-for="item in verMainVersion" :key="item.versionCode" :label="item.versionCode" :value="item.versionCode">
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
 
 
 
@@ -116,7 +116,7 @@ export default {
     // 获取版本上传地址
     this.fileUrl = getGlobalParams.get("versionFileUploadAddress");
     this.initSpinnerList();
-    this.initVersionList()
+    // this.initVersionList()
   },
   methods: {
     // 大于一个文件提示信息
@@ -139,18 +139,18 @@ export default {
     },
 
     // 初始化主版本号下拉框
-    initVersionList() {
-      let resBody = new spinnerDataQuery();
-      resBody.data.spinnerList = [{"spinnerName":"verMainVersion"}];
-      request(resBody)
-        .then(response => {
-          // console.log(response)
-          this.verMainVersion = response.RSP_BODY.verMainVersionSpinner;
-        })
-        .catch(error => {
-          console.error("查询错误", error);
-        });
-    },
+    // initVersionList() {
+    //   let resBody = new spinnerDataQuery();
+    //   resBody.data.spinnerList = [{"spinnerName":"verMainVersion"}];
+    //   request(resBody)
+    //     .then(response => {
+    //       // console.log(response)
+    //       this.verMainVersion = response.RSP_BODY.verMainVersionSpinner;
+    //     })
+    //     .catch(error => {
+    //       console.error("查询错误", error);
+    //     });
+    // },
 
     // 关闭dialog的回调
     closeCallback() {

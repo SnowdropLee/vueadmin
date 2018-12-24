@@ -5,7 +5,7 @@
       <el-card>
         <el-form :model="form" :rules="rules" ref="form" size="mini" label-width="80px" label-position="left">
           <el-form-item label="版本编号" prop="versionCode">
-            <el-input v-model="versionCode" placeholder="请输入版本编号">
+            <el-input v-model="versionCode" placeholder="本次发布版本的唯一标识号">
             </el-input>
           </el-form-item>
 
