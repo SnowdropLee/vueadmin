@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       roleNameV: [],//V端角色列表
-      roleNameC: [],//C端角色列表
+      roleNameC: [],//C端角色列表--->IDE
       roleList: [],//当前角色所拥有得权限
       selRole: "",//当前选中得角色
       roleInfo: [],//当前角色的详细信息
@@ -185,7 +185,7 @@ export default {
               if (list[i].roleSystem == "001") {
                 // list[i].roleSystem = "C端";
                 this.roleNameC.push(list[i]);
-              } else {
+              } else if(list[i].roleSystem == "002"){
                 // list[i].roleSystem = "V端";
                 this.roleNameV.push(list[i]);
               }

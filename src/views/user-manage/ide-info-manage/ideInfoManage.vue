@@ -20,7 +20,7 @@
                 <el-radio :label="item.roleId"  @change="roleChange(item)"  border v-for="item in  roleNameC" :key="item.id">{{item.roleName}}</el-radio>
               </el-radio-group>
             </div>
-              <el-button type="primary" size="mini"  @click="dialogOptionsAdd.isShow=true;dialogOptionsAdd.active=0;dialogOptionsAdd.aumsSystem='001';"  v-if="btnPermission('Button_Role_Add')">新建角色</el-button>
+              <el-button type="primary" size="mini"  @click="dialogOptionsAdd.isShow=true;dialogOptionsAdd.active=0;dialogOptionsAdd.aumsSystem='004';"  v-if="btnPermission('Button_Role_Add')">新建角色</el-button>
               <el-button type="danger"  :disabled="isDisabledDel" size='mini' @click="delRoleClick" v-if="btnPermission('Button_Role_Delete')">删除角色</el-button>                    
             </el-tab-pane>
           </el-tabs>
@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       roleNameV: [],//V端角色列表
-      roleNameC: [],//C端角色列表
+      roleNameC: [],//C端角色列表--->IDE
       roleList: [],//当前角色所拥有得权限
       selRole: "",//当前选中得角色
       roleInfo: [],//当前角色的详细信息
@@ -182,7 +182,7 @@ export default {
                 : list[i].roleState == "1"
                   ? (list[i].roleState = "正常")
                   : (list[i].roleState = "锁定");
-              if (list[i].roleSystem == "001") {
+              if (list[i].roleSystem == "004") {
                 // list[i].roleSystem = "C端";
                 this.roleNameC.push(list[i]);
               } else {
