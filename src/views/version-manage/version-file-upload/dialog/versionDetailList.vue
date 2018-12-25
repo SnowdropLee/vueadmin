@@ -74,9 +74,12 @@ export default {
      */
     getVersionDetailList() {
       let resBody = new versionDetailList();
+      
       resBody.data.versionCode = this.versionCode;
+      resBody.data.fileName = this.option.fileName
       resBody.QueryRowNum = getGlobalParams.get("PageSize");
       resBody.QueryPageNo = this.currentPage;
+
       request(resBody)
         .then(response => {
           if (response.SYS_HEAD.ReturnCode === "000000") {

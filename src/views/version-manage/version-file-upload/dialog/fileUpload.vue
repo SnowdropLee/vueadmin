@@ -7,12 +7,15 @@
           <el-form-item label="版本编号" prop="versionCode">
             <el-input v-model="versionCode" placeholder="本次发布版本的唯一标识号">
             </el-input>
+            <div class="el-upload__tip">版本号规则：V_8位数字_4位数字</div>
           </el-form-item>
 
           <el-form-item label="文件上传" prop="filename">
             <el-upload ref="upload" :action=fileUrl :on-change="versionIsExistChange" :limit="1" :on-exceed="handleExceed" :on-success="successCallback" :on-remove="delfile" accept=".zip" :auto-upload="false">
               <el-button size="mini" plain type="primary">选择上传文件</el-button>
-              <div slot="tip" class="el-upload__tip"> 版本号规则：v_8位数字_4位数字，格式：zip</div>
+              <div slot="tip" class="el-upload__tip">  总行文件名规则：V_8位数字_4位数字，格式：zip</div>
+              <div slot="tip" class="el-upload__tip">  分行文件名规则：V_8位数字_机构号_4位数字，格式：zip
+</div>
             </el-upload>
           </el-form-item>
 
@@ -204,7 +207,7 @@ export default {
     versionIsExistChange(file, fileList) {
       this.uploadFileName = file.name;
       // 转化版本号
-      this.versionCode = this.uploadFileName.split('.', 1).toString();
+      // this.versionCode = this.uploadFileName.split('.', 1).toString();
       let resBody = new versionIsExist();
       resBody.data.versionCode = this.versionCode;
       request(resBody)

@@ -32,9 +32,10 @@
       <el-table :data="tableData" class="tableMarginTop" header-row-class-name="tableHeaderClass" @selection-change="handleSelectionChange" border>
         <el-table-column type="selection" width="40"></el-table-column>
         <el-table-column fixed prop="versionCode" label="版本编号" width="150"></el-table-column>
-        <el-table-column prop="verOptionsTemplateName" label="所属模版分类" min-width="180"></el-table-column>
-        <el-table-column prop="verCreateTime" label="上传时间" width="160"></el-table-column>
         <el-table-column prop="adDescription" label="版本描述" min-width="200"></el-table-column>
+        <el-table-column prop="verOptionsTemplateName" label="所属模版分类" min-width="180"></el-table-column>
+        <el-table-column prop="fileName" label="版本文件名称" min-width="180"></el-table-column>
+        <el-table-column prop="verCreateTime" label="上传时间" width="160"></el-table-column>
         <el-table-column align="center" fixed="right" label="操作" width="80">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="dialogVersionFileList(scope.$index, tableData)">查看详情</el-button>
@@ -88,7 +89,8 @@ export default {
       dialogOptionsVersionDetail: {
         isShow: false,
         versionCode: "",
-        adDescription: ""
+        adDescription: "",
+        fileName:""
       },
       multipleSelection: [],
       verBaseInfo: []
@@ -207,6 +209,7 @@ export default {
     dialogVersionFileList(index, rows) {
       this.dialogOptionsVersionDetail.versionCode = rows[index].versionCode;
       this.dialogOptionsVersionDetail.adDescription = rows[index].adDescription;
+      this.dialogOptionsVersionDetail.fileName = rows[index].fileName;
       this.dialogOptionsVersionDetail.isShow = true;
     },
 

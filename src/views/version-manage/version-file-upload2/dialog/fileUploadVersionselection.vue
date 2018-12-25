@@ -7,7 +7,7 @@
           <el-form-item label="文件上传" prop="filename">
             <el-upload ref="upload" :action=fileUrl :on-change="versionIsExistChange" :limit="1" :on-exceed="handleExceed" :on-success="successCallback" :on-remove="delfile" accept=".zip" :auto-upload="false">
               <el-button size="mini" plain type="primary">选择上传文件</el-button>
-              <div slot="tip" class="el-upload__tip"> 版本号规则：v_8位数字_4位数字，格式：zip</div>
+              <div slot="tip" class="el-upload__tip"> 版本号规则：D_机构号_8位日期_4位版本序号，格式：zip</div>
             </el-upload>
           </el-form-item>
 
