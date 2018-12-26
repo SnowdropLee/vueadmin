@@ -33,9 +33,9 @@
                                          
              
                <el-col :span="8" :offset="2">
-                    <el-form-item prop="childBranchUseFlag" label="可否管理子机构:">
+                    <!-- <el-form-item prop="childBranchUseFlag" label="可否管理子机构:">
                                     <el-switch v-model="roleListAdd.childBranchUseFlag"></el-switch>
-                                </el-form-item>
+                                </el-form-item> -->
                       <!-- <el-checkbox v-model="roleListAdd.childBranchUseFlag">子机构是否可见</el-checkbox> -->
                   </el-col>    
               </el-row>
@@ -43,8 +43,8 @@
                 <el-col :span="15">
                   <el-form-item label="所属渠道:" prop="aumsSystem">
                   <el-radio-group v-model="option.aumsSystem" disabled>
-                      <el-radio  label="001">自助C端</el-radio>
-                      <el-radio   label="002">自助V端</el-radio>
+                      <el-radio  label="004">IDE权限</el-radio>
+                      <el-radio   label="002">V端权限</el-radio>
                   </el-radio-group>
                   </el-form-item>
                 </el-col>
