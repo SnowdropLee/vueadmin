@@ -87,8 +87,7 @@
           <component :is='dialogList.systemMaintence' :option='dialogOptions' @systemEmit="systemEmit" @systemClose="userClose"></component>
         </keep-alive>
       </div>
-      <div class="content"
-          v-if="active === 2">
+      <div class="content" v-if="active === 2">
           <keep-alive>
               <component :is='dialogList.userRole' :option='dialogOptionsUserRole' @systemClose="userClose"></component>
           </keep-alive>
@@ -267,6 +266,7 @@ export default {
             : 0;
           request(resBody)
             .then(response => {
+              console.log(response)
               if (response.SYS_HEAD.ReturnCode === "000000") {
                 this.dialogOptions.isShow = true;
                 this.dialogOptions.userId = response.REQ_BODY.userId;
