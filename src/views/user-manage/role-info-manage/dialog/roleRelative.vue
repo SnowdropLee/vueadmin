@@ -55,6 +55,7 @@ export default {
       resBody.data.spinnerList = [{ spinnerName: "permission" }];
       request(resBody)
         .then(response => {
+          // console.log(response)
           if (response.SYS_HEAD.ReturnCode === "000000") {
             this.loading = false;
             this.roleList = [];

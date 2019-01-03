@@ -148,13 +148,13 @@ export default {
       dialogOptions: {//创建用户
         isShow: false
       },
-      dialogOptionsSystem: {//用户所属系统
+      dialogOptionsSystem: {//所属系统
         isShow: false,
         system: [],
         userId: "",
         clearRow: false
       },
-      dialogOptionsUserRole: {//用户关联角色
+      dialogOptionsUserRole: {//角色关联
         isShow: false,
         roleIdList: [],
         systemIdList: [],
@@ -228,7 +228,7 @@ export default {
     createUser() {//改变创建用户的显示状态
       this.dialogOptions.isShow = true;
     },
-    systemUser() {//设置打开用户系统页面所需的一些数据
+    systemUser() {//设置打开  所属系统  页面所需的一些数据
       this.dialogOptionsSystem.isShow = true;
       this.dialogOptionsSystem.system = Object.assign(
         [],
@@ -236,6 +236,18 @@ export default {
       );
       this.dialogOptionsSystem.userId = this.currentRow.UserID;
       this.dialogOptionsSystem.clearRow = true;
+    },
+    roleMaintenance() {//设置打开 角色关联  页面所需的一些数据
+      this.dialogOptionsUserRole.isShow = true;
+      this.dialogOptionsUserRole.roleIdList = Object.assign(
+        [],
+        this.currentRow.roleIdList
+      );
+      this.dialogOptionsUserRole.systemIdList = Object.assign(
+        [],
+        this.currentRow.systemIdList
+      );
+      this.dialogOptionsUserRole.userId = this.currentRow.UserID;
     },
     modUser() {//修改用户
       this.dialogOptionsupdateUser.isShow = true;
@@ -266,18 +278,7 @@ export default {
           this.loading = false;
         });
     },
-    roleMaintenance() {//设置打开用户关联角色页面所需的一些数据
-      this.dialogOptionsUserRole.isShow = true;
-      this.dialogOptionsUserRole.roleIdList = Object.assign(
-        [],
-        this.currentRow.roleIdList
-      );
-      this.dialogOptionsUserRole.systemIdList = Object.assign(
-        [],
-        this.currentRow.systemIdList
-      );
-      this.dialogOptionsUserRole.userId = this.currentRow.UserID;
-    },
+    
     checkUserList() {//查询用户表格
       this.tableData = [];
       this.checkedUser = false;
@@ -291,6 +292,7 @@ export default {
       resBody.QueryRowNum = this.pageSize;
       request(resBody)
         .then(response => {
+          // console.log(response)
           if (response.SYS_HEAD.ReturnCode === "000000") {
             //  console.log(response.RSP_BODY.UserList,"response.RSP_BODY.UserList")
             this.loading = false;

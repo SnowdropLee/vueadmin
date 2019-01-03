@@ -75,8 +75,9 @@ export default {
     getVersionDetailList() {
       let resBody = new versionDetailList();
       
-      resBody.data.versionCode = this.versionCode;
-      resBody.data.fileName = this.option.fileName
+      resBody.data.versionCode = this.option.zipFileId;
+      resBody.data.fileName = this.option.fileName;
+      resBody.data.zipFileId = this.option.zipFileId;
       resBody.QueryRowNum = getGlobalParams.get("PageSize");
       resBody.QueryPageNo = this.currentPage;
 

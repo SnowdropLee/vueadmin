@@ -46,18 +46,30 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-
+              </el-row>
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label="发布备注:"  prop="remark">
+                    <el-input v-model="form.remark" placeholder="请填写发布备注"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
                 <el-col :span="13">
                   <el-form-item label="发布方式 : ">
-                    <el-radio-group v-model="radio" @change="initselBrno">
+                    <!-- <el-radio-group v-model="radio" @change="initselBrno">
                       <el-radio :label="0">按分组</el-radio>
                       <el-radio :label="1">按机构</el-radio>
                       <el-radio :label="2">按设备</el-radio>
-                    </el-radio-group>
+                    </el-radio-group> -->
+                    <el-checkbox-group v-model="checkList" @change="checked">
+                      <el-checkbox label="BrNo">按机构</el-checkbox>
+                      <el-checkbox label="DevNo">按设备</el-checkbox>
+                    </el-checkbox-group>
                   </el-form-item>
                 </el-col>
 
-                <el-col :span="12" v-if="radio == '0'">
+                <!-- <el-col :span="12" v-if="radio == '0'">
                   <el-form-item label="分组 : " prop="area">
                     <el-select v-model="form.area" placeholder="请选择分组" clearable @change="groupChange">
                       <el-option
@@ -68,8 +80,8 @@
                       ></el-option>
                     </el-select>
                   </el-form-item>
-                </el-col>
-                <el-col :span="12" v-if="radio == '1'">
+                </el-col> -->
+                <el-col :span="12" v-if="this.BrNo == 1">
                   <el-form-item label="机构 : " prop="selBrno">
                     <select-tree
                       :tree-data="brnoList"
@@ -82,7 +94,7 @@
                 </el-col>
               </el-row>
 
-              <el-row v-if="radio=='2'">
+              <el-row v-if="this.DevNo == 1">
                 <el-col>
                   <el-table
                     :data="devTableData"
@@ -168,14 +180,21 @@
                 ></el-input>
               </el-form-item>
 
+              <el-form-item label="发布备注 :">
+                <el-input v-model="form.remark" disabled></el-input>
+              </el-form-item>
+
               <!-- 发布方式 -->
-              <el-form-item label="机构 :" v-if="treeselectdata && radio==1">
+              <!-- <el-form-item label="机构 :" v-if="treeselectdata && radio==1">
                 <el-input  v-model="treeselectdata" disabled></el-input>
+              </el-form-item> -->
+              <el-form-item label="机构 :" v-if="treeselectdata && BrNo==1">
+                <el-input v-model="treeselectdata" disabled></el-input>
               </el-form-item>
               <el-form-item label="分组 :" v-if="areaName && radio==0">
                 <el-input  v-model="areaName" disabled></el-input>
               </el-form-item>
-              <el-form-item label="设备 :" v-if="devList && radio==2">
+              <!-- <el-form-item label="设备 :" v-if="devList && radio==2">
                 <el-table
                     :data="devList"
                     min-height="200"
@@ -186,6 +205,14 @@
                     <el-table-column prop="branchname" label="及其所在网点" width="150"></el-table-column>
                     <el-table-column prop="devip" label="设备IP" min-width="120"></el-table-column>
                   </el-table>
+              </el-form-item> -->
+              <el-form-item label="设备 :" v-if="devList && DevNo==1">
+                <el-table :data="devList" min-height="200" border>
+                  <el-table-column fixed prop="devnum" label="设备编号" width="120"></el-table-column>
+                  <el-table-column prop="devtype" label="设备类型" width="160"></el-table-column>
+                  <el-table-column prop="branchname" label="及其所在网点" width="150"></el-table-column>
+                  <el-table-column prop="devip" label="设备IP" min-width="120"></el-table-column>
+                </el-table>
               </el-form-item>
             </el-form>
           </el-card>
@@ -211,6 +238,7 @@ import getGlobalParams from "@/utils/getGlobalParams";
 import spinnerDataList from "@/message/spinnerDataQuery/spinner-data-query";
 import releasebydev from "@/message/version/versionMainRelease/release-by-dev";
 import releasebybrno from "@/message/version/versionMainRelease/release-by-brno";
+import releasebyrule from "@/message/version/versionMainRelease/release-by-rule";
 import releasebyarea from "@/message/version/versionMainRelease/release-by-area";
 import releaseDevinfoQuery from "@/message/version/versionMainRelease/release-devinfo-query";
 export default {
@@ -253,6 +281,7 @@ export default {
       areaList: [], // 按分组选择-----分组数据
       verUpdateDevList: [],
       form: {
+        remark:'', //发布备注
         selBrno: [], //机构选中的内容
         versionCode: "", //版本编号
         area: "", //分组选中的内容 ---->branchAreaId
@@ -267,6 +296,9 @@ export default {
 
       // 定义校验规则
       rules: {
+        remark:[
+          { required: true, message: "请填写发布备注", trigger: "blur" }
+        ],
         versionCode: [
           { required: true, message: "请选择版本编号", trigger: "change" }
         ],
@@ -298,7 +330,11 @@ export default {
       currentPage: 1,
       radio: 0,
       active: 0,
-      devTableData: [{}]
+      devTableData: [{}],
+      BrNo: 0,
+      DevNo: 0,
+      checkList: []
+
     };
   },
   computed: {
@@ -322,7 +358,7 @@ export default {
       let resBody = new spinnerDataList();
       resBody.data.spinnerList = [
         { spinnerName: "branch" },
-        { spinnerName: "branchVerBaseInfo" },
+        { spinnerName: "verBaseInfo" },
         { spinnerName: "branchArea" }
       ];
       request(resBody)
@@ -417,6 +453,9 @@ export default {
       }
     },
     closeCallback() {
+      this.BrNo = 0
+      this.DevNo = 0
+      this.checkList = []
       this.active = 0;
       this.radio = 0;
       this.verUpdateDevList = [];
@@ -467,11 +506,11 @@ export default {
       if (this.active >= 0) this.active--;
     },
     sure(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.loading = true;
-          if (this.radio === 2) { 
-            let resBody = new releasebydev();
+      this.$refs[formName].validate(valid=>{
+        if(valid){
+          this.loading = true
+          if (this.DevNo ===1 && this.BrNo ===0) {
+            let resBody = new releasebyrule();
             resBody.data.versionCode = this.form.versionCode;
             resBody.data.isEffective = this.form.isEffective + "";
             resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
@@ -479,7 +518,9 @@ export default {
             resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
             resBody.data.verUpdatePattern = this.radio + "";
             resBody.data.branchNo = this.$store.getters.branchNo;
+            resBody.data.remark = this.form.remark
             resBody.data.verUpdateDevList = this.verUpdateDevList;
+            resBody.data.verUpdateBrnoList = [];
             request(resBody)
               .then(response => {
                 this.verUpdateDevList = [];
@@ -507,8 +548,9 @@ export default {
                 this.loading = false;
                 console.log("error", error);
               });
-          } else if (this.radio === 1) {
-            let resBody = new releasebybrno();
+          }
+          if (this.DevNo ===0 && this.BrNo ===1 ) {
+            let resBody = new releasebyrule();
             resBody.data.versionCode = this.form.versionCode;
             resBody.data.isEffective = this.form.isEffective + "";
             resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
@@ -516,7 +558,9 @@ export default {
             resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
             resBody.data.verUpdatePattern = this.radio + "";
             resBody.data.branchNo = this.$store.getters.branchNo;
+            resBody.data.remark = this.form.remark
             resBody.data.verUpdateBrnoList = this.form.selBrno;
+            resBody.data.verUpdateDevList = [];
             this.form.selBrno = [];
             request(resBody)
               .then(response => {
@@ -543,8 +587,9 @@ export default {
                 this.loading = false;
                 console.log("error", error);
               });
-          } else {
-            let resBody = new releasebyarea();
+          }
+          if (this.DevNo ===0 && this.BrNo ===0){
+            let resBody = new releasebyrule();
             resBody.data.versionCode = this.form.versionCode;
             resBody.data.isEffective = this.form.isEffective + "";
             resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
@@ -552,17 +597,18 @@ export default {
             resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
             resBody.data.verUpdatePattern = this.radio + "";
             resBody.data.branchNo = this.$store.getters.branchNo;
-            resBody.data.zoneNo = this.form.area;
-            console.log(resBody)
+            resBody.data.remark = this.form.remark
+            resBody.data.verUpdateBrnoList = [];
+            resBody.data.verUpdateDevList = [];
+            this.form.selBrno = [];
             request(resBody)
               .then(response => {
+                
                 if (response.SYS_HEAD.ReturnCode === "000000") {
                   this.loading = false;
                   this.$parent.initSpinnerList();
                   this.$parent.currentPage = 1;
                   this.$parent.queryInfoList();
-                  console.log(response);
-                  // this.tableData = response.RSP_BODY.verOptionsTemplateInfoList
                   this.isShow = false;
                   this.$message({
                     message: "恭喜你，版本发布成功！",
@@ -574,6 +620,7 @@ export default {
                     message: response.SYS_HEAD.ReturnMessage,
                     type: "error"
                   });
+                  console.log(response);
                 }
               })
               .catch(error => {
@@ -581,15 +628,173 @@ export default {
                 console.log("error", error);
               });
           }
-        } else {
-          this.$message({
-            message: "请完善信息",
-            type: "warning"
-          });
-          return false;
+          if (this.DevNo ===1 && this.BrNo ===1){
+            let resBody = new releasebyrule();
+            resBody.data.versionCode = this.form.versionCode;
+            resBody.data.isEffective = this.form.isEffective + "";
+            resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
+            resBody.data.verUpdateInterval = this.form.verUpdateInterval;
+            resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
+            resBody.data.verUpdatePattern = this.radio + "";
+            resBody.data.branchNo = this.$store.getters.branchNo;
+            resBody.data.remark = this.form.remark
+            resBody.data.verUpdateBrnoList = this.form.selBrno;
+            resBody.data.verUpdateDevList = this.verUpdateDevList;
+            this.form.selBrno = [];
+            request(resBody)
+              .then(response => {
+                if (response.SYS_HEAD.ReturnCode === "000000") {
+                  this.loading = false;
+                  this.$parent.initSpinnerList();
+                  this.$parent.currentPage = 1;
+                  this.$parent.queryInfoList();
+                  this.isShow = false;
+                  this.$message({
+                    message: "恭喜你，版本发布成功！",
+                    type: "success"
+                  });
+                } else {
+                  this.loading = false;
+                  this.$message({
+                    message: response.SYS_HEAD.ReturnMessage,
+                    type: "error"
+                  });
+                  console.log(response);
+                }
+              })
+              .catch(error => {
+                this.loading = false;
+                console.log("error", error);
+              });
+          }
+          
         }
-      });
+      })
     },
+    // sure(formName) {
+    //   this.$refs[formName].validate(valid => {
+    //     if (valid) {
+    //       this.loading = true;
+    //       if (this.radio === 2) { 
+    //         let resBody = new releasebydev();
+    //         resBody.data.versionCode = this.form.versionCode;
+    //         resBody.data.isEffective = this.form.isEffective + "";
+    //         resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
+    //         resBody.data.verUpdateInterval = this.form.verUpdateInterval;
+    //         resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
+    //         resBody.data.verUpdatePattern = this.radio + "";
+    //         resBody.data.branchNo = this.$store.getters.branchNo;
+    //         resBody.data.verUpdateDevList = this.verUpdateDevList;
+    //         request(resBody)
+    //           .then(response => {
+    //             this.verUpdateDevList = [];
+    //             if (response.SYS_HEAD.ReturnCode === "000000") {
+    //               this.loading = false;
+    //               this.$parent.initSpinnerList();
+    //               this.$parent.currentPage = 1;
+    //               this.$parent.queryInfoList();
+    //               console.log(response);
+    //               this.isShow = false;
+    //               this.$message({
+    //                 message: "恭喜你，版本发布成功！",
+    //                 type: "success"
+    //               });
+    //             } else {
+    //               this.loading = false;
+    //               this.$message({
+    //                 message: response.SYS_HEAD.ReturnMessage,
+    //                 type: "error"
+    //               });
+    //               console.log(response);
+    //             }
+    //           })
+    //           .catch(error => {
+    //             this.loading = false;
+    //             console.log("error", error);
+    //           });
+    //       } else if (this.radio === 1) {
+    //         let resBody = new releasebybrno();
+    //         resBody.data.versionCode = this.form.versionCode;
+    //         resBody.data.isEffective = this.form.isEffective + "";
+    //         resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
+    //         resBody.data.verUpdateInterval = this.form.verUpdateInterval;
+    //         resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
+    //         resBody.data.verUpdatePattern = this.radio + "";
+    //         resBody.data.branchNo = this.$store.getters.branchNo;
+    //         resBody.data.verUpdateBrnoList = this.form.selBrno;
+    //         this.form.selBrno = [];
+    //         request(resBody)
+    //           .then(response => {
+    //             if (response.SYS_HEAD.ReturnCode === "000000") {
+    //               this.loading = false;
+    //               this.$parent.initSpinnerList();
+    //               this.$parent.currentPage = 1;
+    //               this.$parent.queryInfoList();
+    //               this.isShow = false;
+    //               this.$message({
+    //                 message: "恭喜你，版本发布成功！",
+    //                 type: "success"
+    //               });
+    //             } else {
+    //               this.loading = false;
+    //               this.$message({
+    //                 message: response.SYS_HEAD.ReturnMessage,
+    //                 type: "error"
+    //               });
+    //               console.log(response);
+    //             }
+    //           })
+    //           .catch(error => {
+    //             this.loading = false;
+    //             console.log("error", error);
+    //           });
+    //       } else {
+    //         let resBody = new releasebyarea();
+    //         resBody.data.versionCode = this.form.versionCode;
+    //         resBody.data.isEffective = this.form.isEffective + "";
+    //         resBody.data.verUpdatePrepareTime = this.form.verUpdatePrepareTime;
+    //         resBody.data.verUpdateInterval = this.form.verUpdateInterval;
+    //         resBody.data.verUpdateDevNum = this.form.verUpdateDevNum;
+    //         resBody.data.verUpdatePattern = this.radio + "";
+    //         resBody.data.branchNo = this.$store.getters.branchNo;
+    //         resBody.data.zoneNo = this.form.area;
+    //         console.log(resBody)
+    //         request(resBody)
+    //           .then(response => {
+    //             if (response.SYS_HEAD.ReturnCode === "000000") {
+    //               this.loading = false;
+    //               this.$parent.initSpinnerList();
+    //               this.$parent.currentPage = 1;
+    //               this.$parent.queryInfoList();
+    //               console.log(response);
+    //               // this.tableData = response.RSP_BODY.verOptionsTemplateInfoList
+    //               this.isShow = false;
+    //               this.$message({
+    //                 message: "恭喜你，版本发布成功！",
+    //                 type: "success"
+    //               });
+    //             } else {
+    //               this.loading = false;
+    //               this.$message({
+    //                 message: response.SYS_HEAD.ReturnMessage,
+    //                 type: "error"
+    //               });
+    //             }
+    //           })
+    //           .catch(error => {
+    //             this.loading = false;
+    //             console.log("error", error);
+    //           });
+    //       }
+    //     } else {
+    //       this.$message({
+    //         message: "请完善信息",
+    //         type: "warning"
+    //       });
+    //       return false;
+    //     }
+    //   });
+    // },
     //selecttree 方法
     selectChange(checkedNode) {
       var str = ''
@@ -612,7 +817,37 @@ export default {
     groupChange(val){
       this.areaName = event.target.innerText
       // console.dir(event.target.innerText)
-    }
+    },
+    // 计算展示的选项
+    computcheckList() {
+      if (this.checkList.length === 2) {
+        console.log(2)
+        this.BrNo = 1;
+        this.DevNo = 1;
+      }
+      if (this.checkList.length === 1) {
+        console.log(1)
+        if (this.checkList.indexOf("BrNo") > -1) {
+          this.BrNo = 1;
+          this.DevNo = 0;
+        }
+        if (this.checkList.indexOf("DevNo") > -1) {
+          this.DevNo = 1;
+          this.BrNo = 0;
+        }
+      }
+      if (this.checkList.length === 0) {
+        console.log(0)
+        this.BrNo = 0;
+        this.DevNo = 0;
+      }
+    },
+    checked(val) {
+      
+      this.checkList = val;
+      // console.log(this.checkList)
+      this.computcheckList();
+    },
   }
 };
 </script>

@@ -1,8 +1,9 @@
 <template>
   <div  v-loading="loading">
-    <el-card :visible.sync="isShow">
+    <!-- IDE -->
+    <el-card :visible.sync="isShow" >
       <div slot="header" class="clearfix">
-        <span>C端角色</span>
+        <span>IDE角色</span>
       </div>
       <el-row>
         <div  class="userRoleContent">
@@ -36,9 +37,10 @@
         </div>             
       </el-row>
     </el-card>
-     <el-card :visible.sync="isShow" style="margin-top:10px">
+    <!-- 系统 -->
+     <el-card :visible.sync="isShow" style="margin-top:10px" >
        <div slot="header" class="clearfix">
-          <span>V端角色</span>
+          <span>系统角色</span>
         </div>
          <div  class="userRoleContent">
            <el-row :gutter="20">
@@ -80,10 +82,10 @@
            </el-row>
         </div>  
     </el-card>
-      <el-row style="margin:20px; text-align:center">
-          <el-button  size="mini" @click="cancleRole">取消</el-button>
-          <el-button type="primary" size="mini" @click="sureRole">确定</el-button>      
-      </el-row>
+    <el-row style="margin:20px; text-align:center">
+        <el-button  size="mini" @click="cancleRole">取消</el-button>
+        <el-button type="primary" size="mini" @click="sureRole">确定</el-button>      
+    </el-row>
   </div>
 </template>
 <script>
@@ -103,7 +105,8 @@ export default {
       roleListC: [],//C端角色
       roleItemsC: [],//V端角色ID列表
       roleItemsV: [],//C端角色ID列表
-      roleItems: []//角色ID列表
+      roleItems: [],//角色ID列表,
+      // aumsSystem:'002'
     };
   },
   methods: {
@@ -196,6 +199,7 @@ export default {
     }
   },
   created() {
+    // console.log(this.option)
     this.option.hasOwnProperty("roleIdList")
       ? (this.roleItems = this.option.roleIdList)
       : "";
@@ -208,7 +212,7 @@ export default {
         this.loading=false
         let roleList = response.RSP_BODY.roleListSpinner;
         for (let i = 0; i < roleList.length; i++) {
-          if (roleList[i].aumsSystem === "001") {
+          if (roleList[i].aumsSystem === "004") {
             this.roleListC.push(roleList[i]);
           } else if (roleList[i].aumsSystem === "002") {
             this.roleListV.push(roleList[i]);

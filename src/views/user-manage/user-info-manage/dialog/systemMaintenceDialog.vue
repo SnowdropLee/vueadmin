@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import systemMaintence from "./systemMaintence1";
+import systemMaintence from "./systemMaintence";
 export default {
   props: { option: Object },
   data() {

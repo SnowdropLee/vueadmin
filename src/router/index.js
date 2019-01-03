@@ -293,9 +293,10 @@ export const asyncRouterMap = [
     meta: {
       title: '版本管理',
       icon: 'version',
-      roles: ['Menu_VersionFileUpload', 'Menu_VersionMainReleaseList', 'Menu_VersionFileUpload2', 'Menu_VersionReleaseList', 'Menu_VersionRetreat', 'Menu_VersionReleaseHistory', 'Menu_VersionTemplateMaintenance']
+      roles: ['Menu_VersionFileUpload', 'Menu_VersionFileUpload2', 'Menu_VersionMainReleaseList', 'Menu_VersionReleaseList', 'Menu_VersionRetreat', 'Menu_VersionReleaseHistory', 'Menu_VersionTemplateMaintenance']
     },
     children: [
+      // 版本文件管理
       {
         path: 'versionFileUpload',
         name: 'version-file-upload',
@@ -305,6 +306,7 @@ export const asyncRouterMap = [
           roles: ['Menu_VersionFileUpload']
         }
       },
+      // 版本文件管理(分行)
       {
         path: 'versionFileUpload2',
         name: 'version-file-upload2',
@@ -314,24 +316,27 @@ export const asyncRouterMap = [
           roles: ['Menu_VersionFileUpload2']
         }
       },
-      {
-        path: 'versionReleaseList',
-        name: 'version-release-list',
-        component: () => import('@/views/version-manage/version-release/versionReleaseList'),
-        meta: {
-          title: '版本发布',
-          roles: ['Menu_VersionReleaseList']
-        }
-      },
+      // 版本发布(总行)
       {
         path: 'versionMainReleaseList',
         name: 'version-main-release-list',
         component: () => import('@/views/version-manage/version-mainrelease/versionMainReleaseList'),
         meta: {
-          title: '版本发布(总行)',
+          title: '版本发布',
           roles: ['Menu_VersionMainReleaseList']
         }
       },
+      // 版本发布(分行)
+      {
+        path: 'versionReleaseList',
+        name: 'version-release-list',
+        component: () => import('@/views/version-manage/version-release/versionReleaseList'),
+        meta: {
+          title: '版本发布(分行)',
+          roles: ['Menu_VersionReleaseList']
+        }
+      },
+      // 版本回退
       {
         path: 'versionRetreat',
         name: 'version-retraet',

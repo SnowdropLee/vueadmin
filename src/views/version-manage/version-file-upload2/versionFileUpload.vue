@@ -90,7 +90,8 @@ export default {
       dialogOptionsVersionDetail: {
         isShow: false,
         versionCode: "",
-        adDescription: ""
+        adDescription: "",
+        zipFileId:''
       },
       multipleSelection: [],
       verBaseInfo: []
@@ -207,9 +208,11 @@ export default {
      * @param rows
      */
     dialogVersionFileList(index, rows) {
+      // console.log(rows[index].zipFileId)
       this.dialogOptionsVersionDetail.versionCode = rows[index].versionCode;
       this.dialogOptionsVersionDetail.adDescription = rows[index].adDescription;
       this.dialogOptionsVersionDetail.isShow = true;
+      this.dialogOptionsVersionDetail.zipFileId = rows[index].zipFileId
     },
 
     /**

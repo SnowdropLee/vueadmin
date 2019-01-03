@@ -90,7 +90,8 @@ export default {
         isShow: false,
         versionCode: "",
         adDescription: "",
-        fileName:""
+        fileName:"",
+        zipFileId:''
       },
       multipleSelection: [],
       verBaseInfo: []
@@ -163,6 +164,7 @@ export default {
       resBody.QueryPageNo = this.currentPage;
       request(resBody)
         .then(response => {
+          // console.log(response)
           if (response.SYS_HEAD.ReturnCode === "000000") {
             this.loading = false;
             this.tableData = response.RSP_BODY.verInfoList || [];
@@ -176,7 +178,7 @@ export default {
               type: "error"
             });
             this.loading = false;
-            console.log(response);
+            // console.log(response);
           }
         })
         .catch(error => {
@@ -207,9 +209,11 @@ export default {
      * @param rows
      */
     dialogVersionFileList(index, rows) {
+      // console.log(rows)
       this.dialogOptionsVersionDetail.versionCode = rows[index].versionCode;
       this.dialogOptionsVersionDetail.adDescription = rows[index].adDescription;
       this.dialogOptionsVersionDetail.fileName = rows[index].fileName;
+      this.dialogOptionsVersionDetail.zipFileId = rows[index].zipFileId;
       this.dialogOptionsVersionDetail.isShow = true;
     },
 
@@ -263,7 +267,7 @@ export default {
               message: response.SYS_HEAD.ReturnMessage,
               type: "error"
             });
-            console.log(response);
+            // console.log(response);
           }
         })
         .catch(error => {

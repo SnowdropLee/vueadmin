@@ -234,6 +234,7 @@ export default {
       this.versionCode = this.uploadFileName.split(".", 1).toString();
       let resBody = new versionIsExist();
       resBody.data.versionCode = this.versionCode;
+      resBody.data.fileName = this.uploadFileName
       request(resBody)
         .then(response => {
           if (response.SYS_HEAD.ReturnCode === "000000") {

@@ -89,7 +89,7 @@ const user = {
         resBody.data.loginPassword = loginPassword
         request(resBody)
           .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.SYS_HEAD.ReturnCode === '000000') {
               const data = response.SYS_HEAD
               setToken(data.aumsToken)

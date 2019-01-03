@@ -51,10 +51,10 @@ export default {
         }
       ],
       data: [], //树形表格的数据
-      aums001: [], //网页C端的数据
+      aums001: [], //网页C端的数据--------IDE
       CCabinet: [], //自助C端 柜式数据
       CPad: [], //自助C端 PAD数据
-      aums002: [], //自助C端
+      aums002: [], //自助V端-------系统
       selectC: [], //选中的C端的数据
       selectV: [], //选中的V端的数据
       systemList: [] //所有系统列表
@@ -131,6 +131,7 @@ export default {
       resBody.data.spinnerList = [{ spinnerName: "system" }];
       request(resBody)
         .then(response => {
+          // console.log('initSystemList:' , response)
           if (response.SYS_HEAD.ReturnCode == "000000") {
             let systemList = response.RSP_BODY.systemListSpinner;
             this.systemList = systemList;
@@ -140,23 +141,23 @@ export default {
             this.data.push(this.aums002); //将自助V端的数据添加到树形表格
             let aums001C = {
               //将自助C端，柜式，PAD，按固定格式拼接到树形表格，因为这三项是页面展示，并不是后台返回的数据
-              systemName: "自助C端",
+              systemName: "IED权限",
               systemId: "aums001CId",
               isUser: false,
-              children: [
-                {
-                  systemName: "柜式",
-                  devForm: "1",
-                  isUser: false,
-                  children: []
-                },
-                {
-                  systemName: "PAD",
-                  devForm: "2",
-                  isUser: false,
-                  children: []
-                }
-              ]
+              // children: [
+              //   {
+              //     systemName: "柜式",
+              //     devForm: "1",
+              //     isUser: false,
+              //     children: []
+              //   },
+              //   {
+              //     systemName: "PAD",
+              //     devForm: "2",
+              //     isUser: false,
+              //     children: []
+              //   }
+              // ]
             };
             this.data.push(aums001C); //将自助C端，柜式，PAD添加到树形表格
             for (let i = 0; i < this.aums001.length; i++) {

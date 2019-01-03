@@ -12,7 +12,7 @@
 
           <el-form-item label="文件上传" prop="filename">
             <el-upload ref="upload" :action=fileUrl :on-change="versionIsExistChange" :limit="1" :on-exceed="handleExceed" :on-success="successCallback" :on-remove="delfile" accept=".zip" :auto-upload="false">
-              <el-button size="mini" plain type="primary">选择上传文件</el-button>
+              <el-button size="mini" plain type="primary" nativeType="button">选择上传文件</el-button>
               <div slot="tip" class="el-upload__tip">  总行文件名规则：V_8位数字_4位数字，格式：zip</div>
               <div slot="tip" class="el-upload__tip">  分行文件名规则：V_8位数字_机构号_4位数字，格式：zip
 </div>
@@ -182,7 +182,7 @@ export default {
                   type: "error"
                 });
                 this.loading = false;
-                console.log(response);
+                // console.log(response);
               }
             })
             .catch(error => {
@@ -204,12 +204,16 @@ export default {
      * @param file
      * @param fileList
      */
-    versionIsExistChange(file, fileList) {
+    versionIsExistChange(file,) {
+      console.log(file)
+      // console.log(fileList)
+      
       this.uploadFileName = file.name;
       // 转化版本号
       // this.versionCode = this.uploadFileName.split('.', 1).toString();
       let resBody = new versionIsExist();
       resBody.data.versionCode = this.versionCode;
+      resBody.data.fileName = this.uploadFileName
       request(resBody)
         .then(response => {
           if (response.SYS_HEAD.ReturnCode === "000000") {

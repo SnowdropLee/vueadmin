@@ -9,7 +9,7 @@
         </el-col>
       </el-row>
         <el-table
-            :data="tables"
+            :data="tableData"
             class="tableMarginTop"
             header-row-class-name="tableHeaderClass" border>
             <el-table-column fixed prop="versionCode" label="版本号" width="200"></el-table-column>
@@ -19,12 +19,13 @@
             <el-table-column label="操作" fixed="right" width="100">
               <template slot-scope="scope">
                 <el-button
-                v-if="btnPermission('Button_VersionRevert_Revert')"
+                  v-if="btnPermission('Button_VersionRevert_Revert')"
                   @click.native.prevent="versionRetreatRow(scope.$index, tables)"
                   type="primary"
                   size="mini">
-                  立即回退
+                  版本回退
                 </el-button>
+
               </template>
             </el-table-column>
         </el-table>
@@ -54,6 +55,7 @@
 import request from "@/utils/request";
 import importTemplate from './dialog/importTemplate'
 import versionTemplate from '@/message/version/versionTemplate/version-template'
+import retreatbyvs from '@/message/version/versionRetreat/retreatbyversioncode';
 import versionRetreat from '@/message/version/versionRetreat/version-retreat'
 import getGlobalParams from '@/utils/getGlobalParams';
 import toolBox from "@/utils/toolBox";
@@ -115,8 +117,54 @@ export default {
       return this.adStatustype[row[column.property]];
     },
     versionRetreatRow(vindex,vtables) {
-      this.dialogOptions.currentRow=vtables[vindex];
-      this.dialogOptions.importTemplateIsShow = true;
+      this.$confirm('是否回退版本?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => { 
+          this.dialogOptions.currentRow=vtables[vindex];
+          // console.log(this.dialogOptions.currentRow)
+          this.retreatvs()
+          this.$message({
+            type: 'success',
+            message: '回退成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消回退'
+          });          
+        });
+    },
+    retreatvs(){
+      this.loading = true;
+      let resBody = new retreatbyvs();
+      resBody.data.versionCode = this.dialogOptions.currentRow.versionCode;
+      resBody.data.branchNo = this.$store.getters.branchNo;
+      request(resBody)
+      .then(response=>{
+        if(response.SYS_HEAD.ReturnCode === "000000") {
+          console.log(response);
+          this.loading = false;
+          this.$message({
+          message: '版本回退成功',
+          type: 'success'
+          });
+          this.queryInfoList();
+          this.isShow = false;
+        } else {
+          this.loading = false;
+          this.$message({
+            message: response.SYS_HEAD.ReturnMessage,
+            type: "error"
+          });
+          console.log(response);
+        }
+      })
+      .catch(error=>{
+        this.loading = false;
+        console.log("error", error);
+      })
     },
     handleSizeChange(val) {
       this.queryInfoList();
@@ -154,7 +202,7 @@ export default {
             message: response.SYS_HEAD.ReturnMessage,
             type: "error"
           });
-          // console.log(response);
+          console.log(response);
         }
       })
       .catch(error=>{

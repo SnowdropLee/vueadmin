@@ -71,11 +71,11 @@ export default {
       pageSize: getGlobalParams.get("PageSize"),
       loading:false,
       form: {
-        strategy_Id:'',
         versionCode:'',
         applyDate:'',
         adDescription:'',
-        adStatus:''
+        adStatus:'',
+        strategy_Id:'',
       },
       dialogFormVisible: false,
       tableData: [],

@@ -155,7 +155,7 @@ export default {
         }  
       }
     },
-    tableSelect(selection, val) {      
+    tableSelect(selection, val) { 
       if (val.hasOwnProperty("children")) {//调用全选
         if (!val._isSelected) {
           this.isSelAllData(val.children,true,val.parent)

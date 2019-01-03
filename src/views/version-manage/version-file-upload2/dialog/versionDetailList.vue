@@ -73,12 +73,16 @@ export default {
      * 查看当前版本详情信息方法
      */
     getVersionDetailList() {
+      // console.log(this.option) 
       let resBody = new versionDetailList();
-      resBody.data.versionCode = this.versionCode;
+      resBody.data.versionCode = this.option.zipFileId;
+      // resBody.data.fileName = this.option.fileName;
+      resBody.data.zipFileId = this.option.zipFileId;
       resBody.QueryRowNum = getGlobalParams.get("PageSize");
       resBody.QueryPageNo = this.currentPage;
       request(resBody)
         .then(response => {
+          console.log(response)
           if (response.SYS_HEAD.ReturnCode === "000000") {
             this.gridData = response.RSP_BODY.verDetailInfoList;
           } else {

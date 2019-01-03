@@ -99,7 +99,7 @@
 <script>
 import selectTree from "@/components/selectTree2/";
 import request from "@/utils/request";
-import systemMaintence from "./systemMaintence1";
+import systemMaintence from "./systemMaintence";
 import userRole from "./userRole";
 import createUser from "@/message/userManage/user/user-create";
 import devRunList from "@/message/spinnerDataQuery/spinner-data-query";
@@ -139,10 +139,10 @@ export default {
       active: 0,
       newUserDate: {//表单信息
         userIdNo:"",//用户ID
-        userID: "",
+        userID: "", 
         userName: "", //用户名称
         branchId: [], //所属机构
-        remark: "",
+        remark: "", //备注
         tellerNo: "", //柜员号
         jobNumber: "", //工号
         telephone: "", //手机号
@@ -212,12 +212,13 @@ export default {
   },
 
   methods: {
-    initList() {//初始化下拉列表
+    initList() {//初始化 *所属机构 下拉列表
       this.loading=true;
       let resBody = new devRunList();
       resBody.data.spinnerList = [{ spinnerName: "branch" }];
       request(resBody)
         .then(response => {
+          // console.log(response)
           this.loading=false;
           this.brno = response.RSP_BODY.branchSpinner;
         })
@@ -266,7 +267,7 @@ export default {
             : 0;
           request(resBody)
             .then(response => {
-              console.log(response)
+              // console.log(response)
               if (response.SYS_HEAD.ReturnCode === "000000") {
                 this.dialogOptions.isShow = true;
                 this.dialogOptions.userId = response.REQ_BODY.userId;
