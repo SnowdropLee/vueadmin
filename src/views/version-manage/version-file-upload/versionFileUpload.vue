@@ -38,7 +38,7 @@
         <el-col :span=6 :offset="12" class="inlineform">
           <el-form :model="formInline" label-position="top" ref="formInline" size="mini" :inline="true">
             <el-form-item prop="versionCode">
-              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable >
+              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable filterable>
                 <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
                 </el-option>
               </el-select>
