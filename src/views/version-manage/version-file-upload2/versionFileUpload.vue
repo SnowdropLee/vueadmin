@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" element-loading-text="拼命加载中">
-    <el-card style="margin-bottom:10px">
+    <!-- <el-card style="margin-bottom:10px">
       <el-form :model="formInline" label-position="top" ref="formInline" size="mini">
         <el-row :gutter="10">
           <el-col :md="6" :lg="4">
@@ -23,12 +23,33 @@
           </el-col>
         </el-row>
       </el-form>
-    </el-card>
+    </el-card> -->
 
     <el-card>
-      <el-button type='primary' size='mini' icon="el-icon-upload" @click="dialogFileUpload" v-if="btnPermission('Button_VersionUpload_Upload')">上传</el-button>
-      <el-button type='danger' size='mini' icon="el-icon-delete" @click="deleteVertionFile" :disabled="isdeleteDisabled" v-if="btnPermission('Button_VersionUpload_Delete')">删除</el-button>
-
+      <!-- <el-button type='primary' size='mini' icon="el-icon-upload" @click="dialogFileUpload" v-if="btnPermission('Button_VersionUpload_Upload')">上传</el-button>
+      <el-button type='danger' size='mini' icon="el-icon-delete" @click="deleteVertionFile" :disabled="isdeleteDisabled" v-if="btnPermission('Button_VersionUpload_Delete')">删除</el-button> -->
+      <el-row>
+        <el-col :span="6">
+          <el-button  type='primary' size='mini' icon="el-icon-upload" @click="dialogFileUpload" v-if="btnPermission('Button_VersionUpload_Upload')">上传</el-button>
+          <el-button type='danger' size='mini' icon="el-icon-delete" @click="deleteVertionFile" :disabled="isdeleteDisabled" v-if="btnPermission('Button_VersionUpload_Delete')">删除</el-button>
+        </el-col>
+        <el-col :span=6 :offset="12" class="inlineform">
+          <el-form :model="formInline" label-position="top" ref="formInline" size="mini" :inline="true">
+            <el-form-item prop="versionCode">
+              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable >
+                <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="queryInfoList" icon="el-icon-search">查询</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-button type='warning' icon='el-icon-refresh' @click="clearForm('formInline')">重置</el-button>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
       <el-table :data="tableData" class="tableMarginTop" header-row-class-name="tableHeaderClass" @selection-change="handleSelectionChange" border>
         <el-table-column type="selection" width="40"></el-table-column>
         <el-table-column fixed prop="versionCode" label="版本编号" width="200"></el-table-column>
@@ -117,7 +138,7 @@ export default {
       resBody.data.spinnerList = [{ spinnerName: "branchVerBaseInfo" }];
       request(resBody)
         .then(response => {
-          // console.log(response)
+          console.log(response)
           this.verBaseInfo = response.RSP_BODY.verBaseInfoSpinner || [];
           // this.verBaseInfo.unshift({});
         })
@@ -279,4 +300,9 @@ export default {
 </script>
 
 <style scope>
+  .inlineform input{
+
+    min-width: 200px;
+
+  }
 </style>

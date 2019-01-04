@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" element-loading-text="拼命加载中">
-    <el-card style="margin-bottom:10px">
+    <!-- <el-card style="margin-bottom:10px">
       <el-form :model="formInline" ref="formInline" label-position="top" size="mini">
         <el-row :gutter="10">
           <el-col :md="6" :lg="4">
@@ -11,11 +11,11 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <!-- <el-col :md="6" :lg="4">
+          <el-col :md="6" :lg="4">
             <el-form-item label="设备编号" prop="devNum">
               <el-input v-model="formInline.devNum" placeholder="请输入设备编号查询"></el-input>
             </el-form-item>
-          </el-col> -->
+          </el-col>
           <el-col :md="3" :lg="2" class="searchBtnMarginTop">
             <el-form-item>
               <el-button type="primary" @click="queryInfoList" icon="el-icon-search">查询</el-button>
@@ -26,25 +26,46 @@
           </el-col>
         </el-row>
       </el-form>
-    </el-card>
+    </el-card> -->
 
     <el-card>
-      <el-button type='primary' size='mini' @click="dialogVersionRelease" v-if="btnPermission('Button_VersionRelease_Release')">版本发布</el-button>
+      <el-row>
+        <el-col :span="2">
+          <el-button type='primary' size='mini' @click="dialogVersionRelease" v-if="btnPermission('Button_VersionRelease_Release')">版本发布</el-button>
+        </el-col>
+        <el-col :span=6 :offset="16" class="inlineform">
+          <el-form :model="formInline" ref="formInline" label-position="top" size="mini" :inline="true">
+            <el-form-item prop="versionCode">
+              <el-select v-model="formInline.versionCode" placeholder="请选择版本编号查询" clearable>
+                <el-option v-for="item in verBaseInfo" :key="item.adID" :label="item.versionCode" :value="item.versionCode">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="queryInfoList" icon="el-icon-search">查询</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-button type='warning' size='mini' icon='el-icon-refresh' @click="clearForm('formInline')">重置</el-button>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+      <!-- <el-button type='primary' size='mini' @click="dialogVersionRelease" v-if="btnPermission('Button_VersionRelease_Release')">版本发布</el-button> -->
       <el-table border class="tableMarginTop" :data="tableData" header-row-class-name="tableHeaderClass">
         <!-- <el-table-column type="selection" width="40"></el-table-column> -->
         <!-- <el-table-column fixed prop="devNum" label="设备编号" min-width="100" align="center"></el-table-column> -->
-        <el-table-column prop="versioncode" label="版本编号" min-width="100" align="center"></el-table-column>
-        <el-table-column prop="versiondesc" label="版本描述" min-width="220" align="center"></el-table-column>
-        <el-table-column prop="strategy_template_name" label="版本策略" min-width="220" align="center"></el-table-column>
+        <el-table-column prop="versioncode" label="版本编号" min-width="100" align="left"></el-table-column>
+        <el-table-column prop="versiondesc" label="版本描述" min-width="220" align="left"></el-table-column>
+        <el-table-column prop="strategy_template_name" label="版本策略" min-width="220" align="left"></el-table-column>
         <!-- <el-table-column prop="branchNo" label="所属网点" min-width="120" align="center"></el-table-column> -->
         <!-- <el-table-column prop="isEffective" :formatter="Format" label="是否立即生效" width="120"></el-table-column>
         <el-table-column prop="verUpdateInterval" label="升级时间间隔" width="120"></el-table-column>
         <el-table-column prop="verUpdateDevNum" label="升级机器数量" width="120"></el-table-column>
         <el-table-column prop="zip" label="开始时间" width="180"></el-table-column> -->
-        <el-table-column prop="createtime" :formatter="dtFormat" label="发布时间" min-width="120" align="center"></el-table-column>
-        <el-table-column label="版本发布状态" min-width="80" align="center" :formatter="computedVersionstatus"></el-table-column>
+        <el-table-column prop="createtime" :formatter="dtFormat" label="发布时间" min-width="120" align="left"></el-table-column>
+        <el-table-column label="版本发布状态" min-width="80" align="left" :formatter="computedVersionstatus"></el-table-column>
         <el-table-column prop="remark" label="发布备注" min-width="220"></el-table-column>
-        <el-table-column align="center" fixed="right" label="操作" width="120">
+        <el-table-column align="left" fixed="right" label="操作" width="120">
           <template slot-scope="scope">
             <el-button
                   :disabled="scope.row.versionstatus==1?false:true"
@@ -256,4 +277,7 @@ export default {
 </script>
 
 <style scope>
+  .inlineform input {
+    min-width: 200px;
+  }
 </style>
